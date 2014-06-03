@@ -6,19 +6,23 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.walmart.delivery.persistence.dao.MapsDAO;
 import com.walmart.delivery.persistence.entity.MapLocation;
 import com.walmart.delivery.persistence.entity.Maps;
 
 @SuppressWarnings("all")
+@Repository
 public class MapsDAOPostgreSQL implements MapsDAO {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
 	public MapsDAOPostgreSQL(DataSource dataSource){
 		this.dataSource = dataSource;
 	}

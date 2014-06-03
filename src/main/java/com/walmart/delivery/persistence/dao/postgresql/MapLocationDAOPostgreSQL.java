@@ -8,21 +8,25 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.walmart.delivery.persistence.dao.MapLocationDAO;
 import com.walmart.delivery.persistence.entity.MapLocation;
 
 @SuppressWarnings("all")
+@Repository
 public class MapLocationDAOPostgreSQL implements MapLocationDAO {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
 	public MapLocationDAOPostgreSQL(DataSource dataSource){
 		this.dataSource = dataSource;
 	}

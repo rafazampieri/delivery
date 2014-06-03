@@ -18,7 +18,7 @@ public class StartApp {
 		deliveryService.addLocationToMap(mapName, "D", "E", 30); 
 		
 		MinorPathTO minorPathTO = deliveryService.calculateMinorPath("SP", "A", "D", 10, 2.5);
-		System.out.println("Path:       " + minorPathTO.getListPathsToString());
+		System.out.println("Path:       " + minorPathTO.getListPaths());
 		System.out.println("Distance:   " + minorPathTO.getDistance());
 		System.out.println("Total Cost: R$ " + minorPathTO.getTotalCost());
 	}

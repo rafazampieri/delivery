@@ -3,6 +3,11 @@ package com.walmart.delivery.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.walmart.delivery.model.algorithm.MinorPathAlgorithm;
 import com.walmart.delivery.model.algorithm.MinorPathAlgorithm.ResultMinorPathAlgorithm;
 import com.walmart.delivery.model.to.MinorPathTO;
@@ -11,17 +16,23 @@ import com.walmart.delivery.persistence.dao.MapsDAO;
 import com.walmart.delivery.persistence.entity.MapLocation;
 import com.walmart.delivery.persistence.entity.Maps;
 
+@Service
 public class DeliveryService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(DeliveryService.class);
 	
 	private MapsDAO mapsDAO;
 	private MapLocationDAO mapLocationDAO;
 	
+	@Autowired
 	public DeliveryService(MapsDAO mapsDAO, MapLocationDAO mapLocationDAO) {
 		this.mapsDAO = mapsDAO;
 		this.mapLocationDAO = mapLocationDAO;
 	}
 	
 	public void addLocationToMap(String mapName, String locationA, String locationB, Integer cost){
+		logger.debug("params: [mapName:"+mapName+",locationA:"+locationA+",locationB:"+locationB+",cost:"+cost+"]");
+		
 		locationA = locationA.trim().toUpperCase();
 		locationB = locationB.trim().toUpperCase();
 		
@@ -74,6 +85,8 @@ public class DeliveryService {
 	}
 	
 	public MinorPathTO calculateMinorPath(String mapName, String locationBegin, String locationEnd, Integer fuelAutonomy, Double fuelCost) throws Exception{
+		logger.debug("params: [mapName:"+mapName+",locationBegin:"+locationBegin+",locationB:"+locationEnd+",fuelAutonomy:"+fuelAutonomy+",fuelCost:"+fuelCost+"]");
+		
 		Maps maps = mapsDAO.findByNameIgnoreCase(mapName);
 		if(maps == null){
 			throw new Exception("Not found mapName.");

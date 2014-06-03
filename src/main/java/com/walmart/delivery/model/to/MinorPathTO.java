@@ -8,7 +8,6 @@ import com.walmart.delivery.model.algorithm.MinorPathAlgorithm.ResultMinorPathAl
 public class MinorPathTO implements Serializable{
 	private static final long serialVersionUID = 5295145406705669752L;
 	
-	private Integer mapsId;
 	private String mapName;
 	private Integer distance;
 	private Integer fuelAutonomy;
@@ -19,17 +18,9 @@ public class MinorPathTO implements Serializable{
 	public MinorPathTO(ResultMinorPathAlgorithm resultMinorPathAlgorithm) {
 		this.listPaths = resultMinorPathAlgorithm.getListPaths();
 		this.mapName = resultMinorPathAlgorithm.getMapName();
-		this.mapsId = resultMinorPathAlgorithm.getMapsId();
 		this.distance = resultMinorPathAlgorithm.getDistance();
 	}
 	
-	public String getListPathsToString(){
-		StringBuilder paths = new StringBuilder();
-		for (String path: getListPaths()) {
-			paths.append(path + " ");
-		}
-		return paths.toString();
-	}
 	public Double getTotalCost(){
 		return (((double)distance / (double)fuelAutonomy) * fuelCost);
 	}
@@ -63,14 +54,6 @@ public class MinorPathTO implements Serializable{
 	}
 	public void setListPaths(List<String> listPaths) {
 		this.listPaths = listPaths;
-	}
-
-	public Integer getMapsId() {
-		return mapsId;
-	}
-
-	public void setMapsId(Integer mapsId) {
-		this.mapsId = mapsId;
 	}
 
 }
