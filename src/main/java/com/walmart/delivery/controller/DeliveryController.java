@@ -26,14 +26,21 @@ public class DeliveryController {
 		this.deliveryService = deliveryService;
 	}
 
-	@RequestMapping(value = ProjectRestURIConstants.DeliveryController.POST_ADD_LOCATION_TO_MAP, method = RequestMethod.GET)
-	public @ResponseBody Maps addLocationToMap() {
-		System.out.println("addlocationToMap");
-		logger.info("Call addLocationToMap()");
-		return new Maps("SP");
+	// ex: http://localhost:8080/delivery/rest/delivery/addLocationToMap/SP/B/F/5
+	@RequestMapping(value = ProjectRestURIConstants.DeliveryController.POST_ADD_LOCATION_TO_MAP, method = RequestMethod.POST)
+	public @ResponseBody Boolean addLocationToMap(@PathVariable("mapName") String mapName, 
+			@PathVariable("locationBegin") String locationBegin, @PathVariable("locationEnd") String locationEnd, 
+			@PathVariable("cost") Integer cost) {
+		try{
+			deliveryService.addLocationToMap(mapName, locationBegin, locationEnd, cost);
+			return true;
+		} catch (Throwable t){
+			t.printStackTrace();
+			return false;
+		}
 	}
 	
-	// http://localhost:8080/delivery/rest/delivery/calculateMinorPath/SP/A/D/10/2.5
+	// ex: http://localhost:8080/delivery/rest/delivery/calculateMinorPath/SP/A/D/10/2.5
 	@RequestMapping(value = ProjectRestURIConstants.DeliveryController.GET_CALCULATE_MINOR_PATH, method = RequestMethod.GET)
 	public @ResponseBody MinorPathTO calculateMinorPath(@PathVariable("mapName") String mapName, 
 			@PathVariable("locationBegin") String locationBegin, @PathVariable("locationEnd") String locationEnd, 
@@ -41,9 +48,4 @@ public class DeliveryController {
 		return deliveryService.calculateMinorPath(mapName, locationBegin, locationEnd, fuelAutonomy, fuelCost);
 	}
 
-	@RequestMapping("/olaMundoSpring")
-	public String execute() {
-		System.out.println("Executando a lógica com Spring MVC");
-		return "ok";
-	}
 }
