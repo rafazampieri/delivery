@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.walmart.delivery.model.exception.DeliveryException;
 import com.walmart.delivery.persistence.dao.MapLocationDAO;
 import com.walmart.delivery.persistence.entity.MapLocation;
 
@@ -34,9 +35,9 @@ public class MinorPathAlgorithm {
 		List<String> listPaths = new ArrayList<String>();
 	}
 	
-	public ResultMinorPathAlgorithm calculate(Integer mapsId, String locationA, String locationB) throws Exception{
+	public ResultMinorPathAlgorithm calculate(Integer mapsId, String locationA, String locationB) throws DeliveryException{
 		if(locationA.equals(locationB)){
-			throw new Exception("Location A equals Location B");
+			throw new DeliveryException("Location A equals Location B");
 		}
 		this.mapsId = mapsId;
 		this.locationB = locationB;
@@ -44,7 +45,7 @@ public class MinorPathAlgorithm {
 		MapLocation mapLocationA = mapLocationDAO.findByMapsIdAndLocation(this.mapsId, locationA);
 		MapLocation mapLocationB = mapLocationDAO.findByMapsIdAndLocation(this.mapsId, locationB);
 		if(mapLocationA == null || mapLocationB == null){
-			throw new Exception("Not found location.");
+			throw new DeliveryException("Not found one or two locations.");
 		}
 		
 		DistanceAndPath costVsRout = new DistanceAndPath(0, 0);

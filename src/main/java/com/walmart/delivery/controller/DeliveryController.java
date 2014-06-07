@@ -31,6 +31,7 @@ public class DeliveryController {
 	public @ResponseBody Boolean addLocationToMap(@PathVariable("mapName") String mapName, 
 			@PathVariable("locationBegin") String locationBegin, @PathVariable("locationEnd") String locationEnd, 
 			@PathVariable("cost") Integer cost) {
+		logger.debug("params: [mapName:{},locationA:{},locationB:{},cost:{}]", mapName, locationBegin, locationEnd, cost);
 		try{
 			deliveryService.addLocationToMap(mapName, locationBegin, locationEnd, cost);
 			return true;
