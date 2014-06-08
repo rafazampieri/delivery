@@ -2,13 +2,14 @@ package com.walmart.delivery.persistence.dao.postgresql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,12 +17,15 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.walmart.delivery.controller.rest.DeliveryRestController;
 import com.walmart.delivery.persistence.dao.MapLocationDAO;
 import com.walmart.delivery.persistence.entity.MapLocation;
 
 @SuppressWarnings("all")
 @Repository
-public class MapLocationDAOPostgreSQL implements MapLocationDAO {
+public class MapLocationDAOPostgreSQL implements MapLocationDAO{
+	
+	private static final Logger logger = LoggerFactory.getLogger(MapLocationDAOPostgreSQL.class);
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
@@ -57,7 +61,12 @@ public class MapLocationDAOPostgreSQL implements MapLocationDAO {
 		String sql = "SELECT * FROM map_location WHERE maps_id = ? and upper(location) = upper(?)";
 		
 		jdbcTemplate = new JdbcTemplate(dataSource);
-		return (MapLocation) jdbcTemplate.queryForObject(sql, new Object[] { mapsId, location }, new BeanPropertyRowMapper(MapLocation.class));
+		try {
+			return (MapLocation) jdbcTemplate.queryForObject(sql, new Object[] { mapsId, location }, new BeanPropertyRowMapper(MapLocation.class));
+		} catch(EmptyResultDataAccessException e){
+			logger.debug("Not found", e);
+			return null;
+		}
 	}
 
 	public List<MapLocation> findByMapsIdAndLocationInList(Integer mapsId, List<String> listLocations) {
