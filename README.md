@@ -83,7 +83,3 @@ http://localhost:8080/delivery/rest/delivery/calculateMinorPath/SP/A/D/10/2.5
 Primeiro é feita a consulta no Maps para descobrir se o Mapa existe, depois no locationBegin e locationEnd para descobrir se as localizações consultadas são válidas. Após essas validações é convertido o JSON do locationBegin e realizado um consulta no banco de dados realizando in() com todas as arestas possíveis, com o retorno é inicio o looping que só termina quando é encontrado o menor caminho. O looping consiste em verificar cada aresta que ainda não foi consultada e realizar novas consultas utilizando essas arestas e sempre adicionando o custo entre cada aresta. 
 
 Obs: Como o requisito inicial consta que deve conter o menor caminho, o algoritmo percorre todas as localizações existentes, no mapa.
-
------------------------------------------
-Testes
-Para entregar o requisito em tempo hábil não foi implentado testes dentro do projeto, o próximo passo seria configurar o spring-test, mas como durante essa configuração foi percebido que levaria um tempo até entender como implementar foi optado por entregar sem os testes.
