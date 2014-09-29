@@ -66,8 +66,10 @@ http://localhost:8080/delivery/rest/delivery/addLocationToMap/SP/B/E/10
 http://localhost:8080/delivery/rest/delivery/addLocationToMap/SP/D/E/10
 
 Com essas chamadas REST o banco de dados ficou da seguinte maneira:
+
 Maps
 id=1,name=SP
+
 MapLocation
 id=1,location=A,json_edges={B:10,C:20}
 id=2,location=B,json_edges={A:10,D:15}
