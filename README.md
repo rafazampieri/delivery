@@ -9,10 +9,10 @@ Tecnologias / Frameworks:
 
 -----------------------------------------
 Como executar o projeto:
-1. Utilizando o git, execute o comando "git clone https://github.com/rafazampieri/delivery.git"
-2. Acesse a pasta aonde está o pom.xml e execute mvn clean install, para que as bibliotecas sejam baixadas.
-3. O projeto foi criado utilizando como banco de dados o postgresql, acesse o caminho /delivery/documentation/database/postgresql/ e execute os scripts para inicializar a configuração do banco de dados. Obs: Os scripts estão numerados.
-4. Inicie o servidor de aplicação.
+ 1. Utilizando o git, execute o comando "git clone https://github.com/rafazampieri/delivery.git"
+ 2. Acesse a pasta aonde está o pom.xml e execute mvn clean install, para que as bibliotecas sejam baixadas.
+ 3. O projeto foi criado utilizando como banco de dados o postgresql, acesse o caminho /delivery/documentation/database/postgresql/ e execute os scripts para inicializar a configuração do banco de dados. Obs: Os scripts estão numerados.
+ 4. Inicie o servidor de aplicação.
 
 -----------------------------------------
 Persistencia:
