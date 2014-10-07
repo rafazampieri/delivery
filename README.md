@@ -68,22 +68,19 @@ Então quando consultas A ele retorna um caminho/distancia até B e se consultam
 Com essas chamadas REST o banco de dados ficou da seguinte maneira:
 
 Maps
-
- id=1,name=SP
+  id=1,name=SP
 
 MapLocation
-
- id=1,location=A,json_edges={B:10,C:20}
- id=2,location=B,json_edges={A:10,D:15}
- id=3,location=C,json_edges={A:20,D:30}
- id=4,location=D,json_edges={B:15,C:30,E:30}
- id=5,location=E,json_edges={B:50,D:30}
+  id=1,location=A,json_edges={B:10,C:20}
+  id=2,location=B,json_edges={A:10,D:15}
+  id=3,location=C,json_edges={A:20,D:30}
+  id=4,location=D,json_edges={B:15,C:30,E:30}
+  id=5,location=E,json_edges={B:50,D:30}
 
 Podemos perceber que toda localização mantém um vinculo com as suas arestas em poucos dados armazenados no banco de dados, com isso é possível realizar consultas mais eficazes e rápidas.
 
 A segunda parte do problema foi realizar o calculo, então partindo do parametros passados na chamada REST o calculo é feito da seguinte maneira:
-
- http://localhost:8080/delivery/rest/delivery/calculateMinorPath/SP/A/D/10/2.5
+  http://localhost:8080/delivery/rest/delivery/calculateMinorPath/SP/A/D/10/2.5
 
 Primeiro é feita a consulta no Maps para descobrir se o Mapa existe, depois no locationBegin e locationEnd para descobrir se as localizações consultadas são válidas. Após essas validações é convertido o JSON do locationBegin e realizado um consulta no banco de dados realizando in() com todas as arestas possíveis, com o retorno é inicio o looping que só termina quando é encontrado o menor caminho. O looping consiste em verificar cada aresta que ainda não foi consultada e realizar novas consultas utilizando essas arestas e sempre adicionando o custo entre cada aresta. 
 
