@@ -1,5 +1,23 @@
+# MAVEN
 target/
 pom.xml.tag
 pom.xml.releaseBackup
+pom.xml.versionsBackup
 pom.xml.next
 release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+logs/
+build/
+
+# IDE support files
+/target
+/target-eclipse
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
